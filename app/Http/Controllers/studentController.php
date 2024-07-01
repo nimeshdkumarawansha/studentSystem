@@ -20,25 +20,18 @@ class studentController extends ParentController
     }
     public function list()
     {
-        $tasks = StudentFacade::all();
-
-        return response()->json([$tasks]);
+        return  StudentFacade::all();
     }
 
     public function delete($task_id)
     {
-        StudentFacade::delete($task_id);
-        return redirect()->back();
+        return StudentFacade::delete($task_id);
     }
 
-    // public function  done($task_id)
-    // {
-    //     $task = $this->task->find($task_id);
-    //     $task->done = 1;
-    //     $task->update();
-
-    //     return redirect()->back();
-    // }
+    public function  done($task_id)
+    {
+        return StudentFacade::done($task_id);
+    }
 
 
 

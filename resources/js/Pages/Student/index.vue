@@ -8,26 +8,14 @@
           <div class="container-fluid col-6">
             <div class="row">
               <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label"
-                  >first Name</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="exampleFormControlInput1"
-                  v-model="task_form.name"
-                  placeholder="Name"
-                />
+                <label for="exampleFormControlInput1" class="form-label">first Name</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" v-model="task_form.name"
+                  placeholder="Name" />
               </div>
               <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">age</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="exampleFormControlInput1"
-                  placeholder="Age"
-                  v-model="task_form.age"
-                />
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Age"
+                  v-model="task_form.age" />
               </div>
               <div class="mb-3">
                 <button class="btn btn-info" type="submit">submit</button>
@@ -55,14 +43,11 @@
                   <span v-else>Completed</span>
                 </td>
                 <td>
-                  <!-- <a href="{{ route('todo.delete',$task->id) }}">Dlect</a>
-                  <a href="{{ route('todo.done',$task->id) }}">sucess</a> -->
-                  <a
-                    href="javascript:void(0)"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                    >edit</a
-                  >
+                  <button type="button" @click="deleteTask(task.id)" class="btn btn-danger">
+                    DELETE
+                  </button>
+                  <button type="button" href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">edit</button>
                 </td>
               </tr>
             </tbody>
@@ -100,22 +85,19 @@ export default {
   methods: {
     async getTask() {
       const tasks = (await axios.get(route("Student.list"))).data;
-      console.log(tasks);
-
       this.task_list = tasks;
-      console.log(this.task_list);
+
     },
     async taskStore() {
       const tasks = (await axios.post(route("Student.store"), this.task_form)).data;
 
-      this.task_list = tasks;
-    //   this.task.name = "";
-    //   this.task.age = "";
+      this.getTask();
+      this.task_form = {};
     },
 
     async deleteTask(id) {
       const tasks = (await axios.delete(route("student.delete", id))).data;
-      this.task_list = tasks;
+      this.getTask();
     },
   },
 };

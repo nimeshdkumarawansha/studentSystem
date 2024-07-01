@@ -17,7 +17,7 @@ Route::prefix('/Student')->group(function () {
     Route::get('/students', [StudentController::class, 'index'])->name('Student.index');
     Route::post('/students/store', [StudentController::class, 'store'])->name('Student.store');
     Route::get('/list', [StudentController::class, 'list'])->name('Student.list');
-    Route::post('/students/delete/{id}', [StudentController::class, 'delete'])->name('student.delete');
+    Route::delete('/students/delete/{id}', [StudentController::class, 'delete'])->name('student.delete');
 
     Route::get('/{task_id}/done', [studentController::class, 'done'])->name('student.done');
     Route::get('/edit', [studentController::class, 'edit'])->name('todo.edit');
